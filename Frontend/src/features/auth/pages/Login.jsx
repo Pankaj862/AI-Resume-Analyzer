@@ -3,6 +3,7 @@ import "../auth.form.scss"
 import {useNavigate, Link} from "react-router"
 import { useAuth } from '../hooks/useAuth'
 
+
 const Login = () => {
 
     const navigate = useNavigate()
@@ -14,6 +15,7 @@ const Login = () => {
     const handleSumbit = async(e) => { //to prevent refresh page when submit button is clicked
         e.preventDefault()
         handleLogin({email, password})
+        navigate('/')
     }
 
     if(loading){
