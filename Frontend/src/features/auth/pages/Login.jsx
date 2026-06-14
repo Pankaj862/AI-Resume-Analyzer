@@ -1,13 +1,23 @@
-import react from 'react'
+import react, { useState } from 'react'
 import "../auth.form.scss"
 import {useNavigate, Link} from "react-router"
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
 
     const navigate = useNavigate()
+    const {loading, handleLogin} = useAuth()
 
-    const handleSumbit = (e) => { //to prevent refresh page when submit button is clicked
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleSumbit = async(e) => { //to prevent refresh page when submit button is clicked
         e.preventDefault()
+        handleLogin({email, password})
+    }
+
+    if(loading){
+        return (<main> Loading...</main>)
     }
 
   return (
@@ -19,12 +29,16 @@ const Login = () => {
         <form onSubmit={handleSumbit}>
             <div className="input-group">
                 <label htmlFor = "email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email"/>
+                <input 
+                onChange={(e)=> {setEmail(e.target.value)}}
+                type="email" id="email" name="email" placeholder="Enter your email"/>
             </div>
 
              <div className="input-group">
                 <label htmlFor = "password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password"/>
+                <input 
+                onChange={(e)=>{setPassword(e.target.value)}}
+                type="password" id="password" name="password" placeholder="Enter your password"/>
             </div>
 
             <button className="button primary">Submit</button>
