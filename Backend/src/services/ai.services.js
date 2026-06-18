@@ -2,6 +2,7 @@ const { GoogleGenAI } = require("@google/genai");
 const interviewReportModel = require("../models/interviewReport.model");
 const {z} = require("zod")
 const { zodToJsonSchema } = require("zod-to-json-schema")
+const geminiResponseSchema = require("../models/geminiresponse.model")
 
 const ai = new GoogleGenAI({
     apiKey: process.env.GOOGLE_GENAI_API_KEY,
@@ -29,83 +30,57 @@ const interviewReportSchema = z.object({
      preparationPlan: z.array(z.object({
         day: z.number().describe("The day number in the preparation plan, starting from 1"),
         focus: z.string().describe("The main focus of this day in the preparation plan, e.g. data structures, system design, mock interviews etc."),
-        tasks: z.array(z.string()).describe("List of tasks to be done on this day to follow the preparation plan, e.g. read a specific book or article, solve a set of problems, watch a video etc.")
+        tasks: z.array(z.string()).describe("List of tasks to be done on this day to follow the preparation plan, e.g. read a specific book or article, solve a set of problems, watch a video etc."),
+         title: z.string().describe("The title of the job for which the interview report is generated"),
     })).describe("A day-wise preparation plan for the candidate to follow in order to prepare for the interview effectively"),
 })
+
 
 
 async function generateInterviewReport({resume, selfDescription, jobDescription}) {
 
  const prompt = `
-Generate interview report.
+Act as an expert Technical Interviewer and Career Coach. 
+Your task is to analyze the provided Resume and Job Description (JD) to generate a structured Interview Preparation Report.
 
-Resume:
-${resume}
+### INPUT DATA:
+- Resume: ${resume}
+- Self Description: ${selfDescription}
+- Job Description: ${jobDescription}
 
-Self Description:
-${selfDescription}
+### GOAL:
+Based on the candidate's background and the JD requirements, generate a JSON object that matches the schema exactly.
+1. Identify the 'matchScore' based on skills.
+2. Generate 'technicalQuestions' and 'behavioralQuestions' tailored to this specific candidate's gaps and strengths.
+3. Identify 'skillGaps' (e.g., if the JD asks for .NET but they only know Node.js).
+4. Create a 7-day 'preparationPlan' to help this candidate bridge those gaps.
 
-Job Description:
-${jobDescription}
-
-Return ONLY VALID JSON.
-
-Required structure:
-
-{
-  "matchScore": number,
-
-  "technicalQuestions": [
-    {
-      "question": "",
-      "intention": "",
-      "answer": ""
-    }
-  ],
-
-  "behavioralQuestions": [
-    {
-      "question": "",
-      "intention": "",
-      "answer": ""
-    }
-  ],
-
-  "skillGaps": [
-    {
-      "skill": "",
-      "severity": "low | medium | high"
-    }
-  ],
-
-  "preparationPlan": [
-    {
-      "day": "",
-      "focus": "",
-      "tasks": []
-    }
-  ]
-}
+### OUTPUT INSTRUCTIONS:
+- Generate ONLY valid JSON.
+- DO NOT use keys like 'candidate_details' or 'job_role'.
+- USE ONLY these top-level keys: "matchScore", "technicalQuestions", "behavioralQuestions", "skillGaps", "preparationPlan", "title".
+- Ensure 'severity' is strictly one of: "low", "medium", or "high".
+- No conversational text before or after the JSON.
 `;
 
     
 
     const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
-            responseSchema: zodToJsonSchema(interviewReportSchema),
+            responseSchema: geminiResponseSchema,
         }
     })
 
     console.log("RAW RESPONSE:");
-console.log(response.text);
+    console.log(response.text);
+
 
     return JSON.parse(response.text)
 
-    console.log("PARSED RESPONSE:");
-    console.dir(parsed, { depth: null });
+    
 
 
 }

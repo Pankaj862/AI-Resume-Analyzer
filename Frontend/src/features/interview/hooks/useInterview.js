@@ -1,0 +1,1 @@
+import {generateInterviewReport,getInterviewReportById, getAllInterviewReports} from '../services/interview.api'
