@@ -25,7 +25,8 @@ async function generateInterviewReportController(req,res) {
     
 
     const interviewReport = await interviewReportModel.create({
-        user: req.user.id,
+        title: "Interview Report",
+        user: req.user.userId,
         resume: resumeContent.text,
         selfDescription,
         jobDescription,
@@ -43,7 +44,12 @@ async function getInterviewReportByIdController(req, res) {
 
     const { interviewId } = req.params
 
-    const interviewReport = await interviewReportModel.findOne({ _id: interviewId, user: req.user.id })
+    console.log("Interview ID:", interviewId);
+    console.log("User:", req.user);
+
+    const interviewReport = await interviewReportModel.findOne({ _id: interviewId,  user: req.user.userId })
+
+    console.log("Found Report:", interviewReport);
 
     if (!interviewReport) {
         return res.status(404).json({
@@ -58,7 +64,7 @@ async function getInterviewReportByIdController(req, res) {
 }
 
 async function getAllInterviewReportsController(req, res) {
-    const interviewReports = await interviewReportModel.find({ user: req.user.id }).sort({ createdAt: -1 }).select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan")
+    const interviewReports = await interviewReportModel.find({ user: req.user.userId}).sort({ createdAt: -1 }).select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillGaps -preparationPlan")
 
     res.status(200).json({
         message: "Interview reports fetched successfully.",
