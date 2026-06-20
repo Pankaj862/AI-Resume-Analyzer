@@ -1,0 +1,660 @@
+// ── Design Tokens ─────────────────────────────────────────────────────────────
+$bg-page:       #0d1117;
+$bg-card:       #161b22;
+$bg-panel:      #1c2230;
+$border-color:  #2a3348;
+$text-primary:  #e6edf3;
+$text-muted:    #7d8590;
+$accent:        #ff2d78;
+$accent-alt:    #ff6b9d;
+$accent-dim:    rgba(255, 45, 120, 0.12);
+$font-stack:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+// ── Reset / Root ───────────────────────────────────────────────────────────────
+.landing-root {
+    width: 100%;
+    min-height: 100vh;
+    background-color: $bg-page;
+    color: $text-primary;
+    font-family: $font-stack;
+    overflow-x: hidden;
+}
+
+// ── Navbar ─────────────────────────────────────────────────────────────────────
+.lp-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid $border-color;
+
+    &__logo {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: $text-primary;
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        span {
+            color: $accent;
+        }
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+
+        a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: $text-muted;
+            text-decoration: none;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: $text-primary;
+            }
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    &__login-btn {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $text-muted;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.4rem;
+        font-family: $font-stack;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $text-primary;
+        }
+    }
+
+    &__cta-btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #fff;
+        background: $accent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem 1.1rem;
+        border-radius: 0.4rem;
+        font-family: $font-stack;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+        box-shadow: 0 0 0 0 rgba($accent, 0);
+
+        &:hover {
+            background: darken($accent, 6%);
+            box-shadow: 0 0 16px rgba($accent, 0.45);
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}
+
+// ── Hero ───────────────────────────────────────────────────────────────────────
+.lp-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 5% 4rem;
+    overflow: hidden;
+
+    // Radial glow behind headline
+    &::before {
+        content: '';
+        position: absolute;
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 700px;
+        height: 500px;
+        background: radial-gradient(ellipse at center, rgba($accent, 0.14) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: $accent;
+        background: $accent-dim;
+        border: 1px solid rgba($accent, 0.3);
+        border-radius: 2rem;
+        padding: 0.3rem 0.85rem;
+        margin-bottom: 1.75rem;
+        animation: fadeUp 0.5s ease both;
+    }
+
+    &__headline {
+        font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: $text-primary;
+        max-width: 800px;
+        margin-bottom: 1.25rem;
+        animation: fadeUp 0.55s 0.08s ease both;
+
+        em {
+            font-style: normal;
+            background: linear-gradient(135deg, $accent 0%, $accent-alt 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    }
+
+    &__sub {
+        font-size: 1.05rem;
+        color: $text-muted;
+        max-width: 520px;
+        line-height: 1.65;
+        margin-bottom: 2.25rem;
+        animation: fadeUp 0.6s 0.14s ease both;
+    }
+
+    &__cta-group {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: fadeUp 0.65s 0.2s ease both;
+    }
+
+    &__primary-btn {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, $accent 0%, darken($accent, 8%) 100%);
+        border: none;
+        cursor: pointer;
+        padding: 0.8rem 1.8rem;
+        border-radius: 0.5rem;
+        font-family: $font-stack;
+        text-decoration: none;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+
+        &:hover {
+            box-shadow: 0 0 24px rgba($accent, 0.5);
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+
+    &__secondary-btn {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $text-muted;
+        background: none;
+        border: 1px solid $border-color;
+        cursor: pointer;
+        padding: 0.8rem 1.8rem;
+        border-radius: 0.5rem;
+        font-family: $font-stack;
+        text-decoration: none;
+        transition: border-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            border-color: $text-muted;
+            color: $text-primary;
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+
+    &__mockup {
+        margin-top: 3.5rem;
+        width: 100%;
+        max-width: 860px;
+        border-radius: 1rem;
+        border: 1px solid $border-color;
+        background: $bg-card;
+        overflow: hidden;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba($accent, 0.07);
+        animation: fadeUp 0.75s 0.3s ease both;
+
+        &-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.75rem 1.1rem;
+            background: $bg-panel;
+            border-bottom: 1px solid $border-color;
+
+            span {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+
+                &:nth-child(1) { background: #ff5f57; }
+                &:nth-child(2) { background: #ffbd2e; }
+                &:nth-child(3) { background: #28c840; }
+            }
+        }
+
+        &-body {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+            min-height: 200px;
+        }
+
+        &-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        &-item {
+            height: 12px;
+            border-radius: 4px;
+            background: $border-color;
+
+            &--accent { background: rgba($accent, 0.35); width: 60%; }
+            &--sm { width: 75%; }
+            &--md { width: 90%; }
+            &--lg { width: 100%; }
+        }
+
+        &-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        &-chart-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+
+            .bar-track {
+                height: 8px;
+                background: $border-color;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            .bar-fill {
+                height: 100%;
+                border-radius: 4px;
+                background: linear-gradient(90deg, $accent, $accent-alt);
+                animation: growBar 1s 0.8s ease both;
+            }
+        }
+    }
+}
+
+@keyframes growBar {
+    from { width: 0 !important; }
+    to   { /* let inline width take over */ }
+}
+
+// ── Section Shared ─────────────────────────────────────────────────────────────
+.lp-section {
+    padding: 5rem 5%;
+
+    &__eyebrow {
+        text-align: center;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: $accent;
+        margin-bottom: 0.75rem;
+    }
+
+    &__title {
+        text-align: center;
+        font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: $text-primary;
+        margin-bottom: 0.65rem;
+    }
+
+    &__sub {
+        text-align: center;
+        font-size: 0.95rem;
+        color: $text-muted;
+        max-width: 480px;
+        margin: 0 auto 3rem;
+        line-height: 1.65;
+    }
+}
+
+// ── Features Grid ──────────────────────────────────────────────────────────────
+.lp-features {
+    background: $bg-page;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+}
+
+.lp-feat-card {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 0.85rem;
+    padding: 1.5rem;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
+
+    &:hover {
+        border-color: rgba($accent, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba($accent, 0.08);
+    }
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.5rem;
+        background: $accent-dim;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $accent;
+        margin-bottom: 1rem;
+        transition: background 0.25s ease;
+    }
+
+    &:hover &__icon {
+        background: rgba($accent, 0.2);
+    }
+
+    &__title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin-bottom: 0.45rem;
+    }
+
+    &__desc {
+        font-size: 0.85rem;
+        color: $text-muted;
+        line-height: 1.6;
+    }
+}
+
+// ── How It Works ───────────────────────────────────────────────────────────────
+.lp-how {
+    background: $bg-card;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+
+    &__steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-width: 680px;
+        margin: 0 auto;
+    }
+}
+
+.lp-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    position: relative;
+
+    &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 19px;
+        top: 52px;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, rgba($accent, 0.35), transparent);
+    }
+
+    &__num {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid rgba($accent, 0.4);
+        background: $accent-dim;
+        color: $accent;
+        font-size: 0.85rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    &__content {
+        padding-top: 0.5rem;
+    }
+
+    &__title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin-bottom: 0.3rem;
+    }
+
+    &__desc {
+        font-size: 0.875rem;
+        color: $text-muted;
+        line-height: 1.6;
+    }
+}
+
+// ── CTA Banner ─────────────────────────────────────────────────────────────────
+.lp-cta-banner {
+    padding: 5rem 5%;
+    text-align: center;
+    background: $bg-page;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 300px;
+        background: radial-gradient(ellipse at center, rgba($accent, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    &__title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        color: $text-primary;
+        margin-bottom: 0.75rem;
+    }
+
+    &__sub {
+        font-size: 1rem;
+        color: $text-muted;
+        max-width: 420px;
+        margin: 0 auto 2rem;
+        line-height: 1.65;
+    }
+
+    &__btn {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, $accent 0%, darken($accent, 8%) 100%);
+        border: none;
+        cursor: pointer;
+        padding: 0.9rem 2.2rem;
+        border-radius: 0.5rem;
+        font-family: $font-stack;
+        text-decoration: none;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+
+        &:hover {
+            box-shadow: 0 0 28px rgba($accent, 0.55);
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}
+
+// ── Footer ─────────────────────────────────────────────────────────────────────
+.lp-footer {
+    background: $bg-card;
+    border-top: 1px solid $border-color;
+    padding: 3rem 5% 2rem;
+
+    &__top {
+        display: grid;
+        grid-template-columns: 1.6fr repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-bottom: 2.5rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__logo {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: $text-primary;
+        text-decoration: none;
+
+        span { color: $accent; }
+    }
+
+    &__tagline {
+        font-size: 0.8rem;
+        color: $text-muted;
+        line-height: 1.55;
+        max-width: 220px;
+    }
+
+    &__col-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: $text-primary;
+        margin-bottom: 0.85rem;
+    }
+
+    &__col-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+
+        a {
+            font-size: 0.825rem;
+            color: $text-muted;
+            text-decoration: none;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: $text-primary;
+            }
+        }
+    }
+
+    &__bottom {
+        border-top: 1px solid $border-color;
+        padding-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    &__copy {
+        font-size: 0.78rem;
+        color: $text-muted;
+    }
+
+    &__bottom-links {
+        display: flex;
+        gap: 1.25rem;
+
+        a {
+            font-size: 0.78rem;
+            color: $text-muted;
+            text-decoration: none;
+            transition: color 0.2s ease;
+
+            &:hover { color: $text-primary; }
+        }
+    }
+}
+
+// ── Animations ─────────────────────────────────────────────────────────────────
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
