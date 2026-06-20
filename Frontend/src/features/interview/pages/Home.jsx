@@ -3,6 +3,7 @@ import "../style/Home.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
 import { useAuth } from '../../auth/hooks/useAuth'
+import { LogOut } from 'lucide-react'
 
 const Home = () => {
 
@@ -36,22 +37,23 @@ const Home = () => {
     return (
         <div className='home-page'>
 
+            {/* ── Top Navigation Bar ── */}
+            <nav className='home-topbar'>
+                <span className='home-topbar__brand'>Resume Analyzer</span>
+                <button
+                    id="logout-btn"
+                    onClick={onLogout}
+                    className='home-topbar__logout'
+                >
+                    <LogOut size={14} />
+                    Logout
+                </button>
+            </nav>
+
             {/* Page Header */}
             <header className='page-header'>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
-                    <div>
-                        <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
-                        <p>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
-                    </div>
-                    <button
-                        id="logout-btn"
-                        onClick={onLogout}
-                        className='button'
-                        style={{ flexShrink: 0, marginTop: '0.25rem' }}
-                    >
-                        Logout
-                    </button>
-                </div>
+                <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
+                <p>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
             </header>
 
             {/* Main Card */}
