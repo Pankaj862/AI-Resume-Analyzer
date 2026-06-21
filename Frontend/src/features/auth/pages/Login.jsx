@@ -15,8 +15,8 @@ const Login = () => {
 
     const handleSumbit = async(e) => { //to prevent refresh page when submit button is clicked
         e.preventDefault()
-        handleLogin({email, password})
-        navigate('/')
+    await handleLogin({email, password})
+        navigate('/home')
     }
 
     if(loading){

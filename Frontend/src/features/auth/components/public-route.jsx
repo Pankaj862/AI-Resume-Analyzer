@@ -15,8 +15,8 @@ const PublicRoute = ({ children }) => {
     }
 
     if (user) {
-        return <Navigate to="/" />
-    }
+    return <Navigate to="/home" />
+}
 
     return children
 }

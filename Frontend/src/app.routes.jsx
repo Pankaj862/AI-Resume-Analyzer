@@ -9,9 +9,9 @@ import Landing from './features/landing/pages/Landing'
 
 export const router = createBrowserRouter([
     {
-        path: "/landing",
-        element: <Landing />
-    },
+    path: "/",
+    element: <Landing />
+},
     {
         path: "/login",
         element: (
@@ -29,15 +29,14 @@ export const router = createBrowserRouter([
         )
     },
 
-    {
-        path: "/",
-        element: (
+   {
+    path: "/home",
+    element: (
         <Protected>
             <Home />
         </Protected>
-       
     )
-    },
+},
 
    {
         path:"/interview/:interviewId",

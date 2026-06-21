@@ -24,7 +24,7 @@ const Register = () => {
             return
         }
        await handleRegister({username, email, password})
-        navigate('/')
+        navigate('/home')
     }
      if(loading){
         return <Spinner />
