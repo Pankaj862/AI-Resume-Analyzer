@@ -658,3 +658,169 @@ $font-stack:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI
         transform: translateY(0);
     }
 }
+
+/* ── Mobile Responsiveness (max-width: 768px) ── */
+@media (max-width: 768px) {
+    .lp-nav {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        
+        &__logo {
+            font-size: 1.05rem;
+        }
+
+        &__links {
+            display: flex;
+            order: 3;
+            width: 100%;
+            justify-content: center;
+            gap: 1.25rem;
+            margin: 0.5rem 0 0;
+            padding: 0;
+            
+            a {
+                font-size: 0.8rem;
+            }
+        }
+        
+        &__actions {
+            gap: 0.5rem;
+        }
+        
+        &__login-btn {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        &__cta-btn {
+            padding: 0.4rem 0.85rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    .lp-hero {
+        padding: 4rem 1rem 3rem;
+        
+        &__badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        &__headline {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        &__sub {
+            font-size: 0.9rem;
+            margin-bottom: 1.75rem;
+            line-height: 1.5;
+        }
+
+        &__cta-group {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            gap: 0.75rem;
+            
+            .lp-hero__primary-btn,
+            .lp-hero__secondary-btn {
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        &__mockup {
+            margin-top: 2.5rem;
+            border-radius: 0.75rem;
+            
+            &-body {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            &-sidebar {
+                gap: 0.5rem;
+            }
+        }
+    }
+
+    .lp-section {
+        padding: 3rem 1rem;
+        
+        &__sub {
+            margin-bottom: 2rem;
+        }
+    }
+
+    .lp-step {
+        gap: 1rem;
+        padding: 1rem 0;
+        
+        &:not(:last-child)::after {
+            left: 16px;
+            top: 44px;
+        }
+        
+        &__num {
+            width: 34px;
+            height: 34px;
+            font-size: 0.75rem;
+        }
+        
+        &__content {
+            padding-top: 0.25rem;
+        }
+        
+        &__title {
+            font-size: 0.95rem;
+        }
+        
+        &__desc {
+            font-size: 0.8rem;
+        }
+    }
+
+    .lp-cta-banner {
+        padding: 3.5rem 1rem;
+        
+        &__title {
+            font-size: 1.6rem;
+        }
+        
+        &__sub {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        &__btn {
+            width: 100%;
+            max-width: 280px;
+            box-sizing: border-box;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+        }
+    }
+
+    .lp-footer {
+        padding: 2rem 1rem 1.5rem;
+        
+        &__top {
+            gap: 2rem;
+        }
+        
+        &__bottom {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+    }
+}

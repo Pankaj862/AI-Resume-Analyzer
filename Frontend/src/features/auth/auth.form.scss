@@ -48,3 +48,27 @@ main {
         margin-bottom: 0.25rem;
     }
 }
+
+/* ── Mobile Responsiveness (max-width: 768px) ── */
+@media (max-width: 768px) {
+    main {
+        padding: 1.5rem;
+        box-sizing: border-box;
+        
+        form {
+            width: 100%;
+            max-width: 360px;
+            min-width: 0;
+        }
+        
+        input {
+            box-sizing: border-box;
+            width: 100%;
+        }
+        
+        .button {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+}
